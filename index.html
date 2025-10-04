@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BurgerBuilder | Customize Your Burger</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        .burger-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+        .topping-item:hover {
+            background-color: #f8f9fa;
+        }
+        #proceedBtn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-orange-600 mb-2">BurgerBuilder Delight 🍔</h1>
+            <p class="text-gray-600">Customize your perfect burger</p>
+        </header>
+
+        <div class="max-w-4xl mx-auto">
+            <section id="burgerSelection" class="mb-12">
+                <h2 class="text-2xl font-semibold text-gray-800 mb-6 border-b pb-2">Choose Your Burger</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="burger-card bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 cursor-pointer border-2 border-transparent" data-burger="cheeseburger" data-price="120">
+                        <img src="./images/burger_img.jpeg" alt="Cheeseburger" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-xl mb-1">Cheeseburger</h3>
+                            <p class="text-gray-600 mb-2">Classic with melted cheese</p>
+                            <p class="text-orange-600 font-bold">₹120</p>
+                        </div>
+                    </div>
+                    <div class="burger-card bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 cursor-pointer border-2 border-transparent" data-burger="veggie" data-price="100">
+                        <img src="./images/burger2.jpeg" alt="Veggie Burger" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-xl mb-1">Veggie Burger</h3>
+                            <p class="text-gray-600 mb-2">Fresh and healthy</p>
+                            <p class="text-orange-600 font-bold">₹100</p>
+                        </div>
+                    </div>
+                    <div class="burger-card bg-white rounded-lg overflow-hidden shadow-md transition-all duration-300 cursor-pointer border-2 border-transparent" data-burger="chicken" data-price="150">
+                        <img src="./images/burger3.jpeg" alt="Chicken Burger" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-xl mb-1">Chicken Burger</h3>
+                            <p class="text-gray-600 mb-2">Juicy chicken patty</p>
+                            <p class="text-orange-600 font-bold">₹150</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="toppingsSection" class="hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-2xl font-semibold text-gray-800 border-b pb-2">Customize Your <span id="selectedBurgerName"></span></h2>
+                    <button id="changeBurgerBtn" class="text-sm text-orange-600 hover:text-orange-700">Change Burger</button>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+                    <h3 class="font-semibold text-lg mb-4 text-gray-800">Add Toppings (₹)</h3>
+                    <div class="space-y-3">
+                        <div class="topping-item flex items-center justify-between p-3 rounded-md hover:bg-gray-50">
+                            <div class="flex items-center">
+                                <input type="checkbox" id="cheese" class="w-5 h-5 text-orange-600 rounded border-gray-300 focus:ring-orange-500" data-price="20">
+                                <label for="cheese" class="ml-3 text-gray-700">Cheese</label>
+                            </div>
+                            <span class="text-orange-600 font-medium">₹20</span>
+                        </div>
+                        <div class="topping-item flex items-center justify-between p-3 rounded-md hover:bg-gray-50">
+                            <div class="flex items-center">
+                                <input type="checkbox" id="lettuce" class="w-5 h-5 text-orange-600 rounded border-gray-300 focus:ring-orange-500" data-price="10">
+                                <label for="lettuce" class="ml-3 text-gray-700">Lettuce</label>
+                            </div>
+                            <span class="text-orange-600 font-medium">₹10</span>
+                        </div>
+                        <div class="topping-item flex items-center justify-between p-3 rounded-md hover:bg-gray-50">
+                            <div class="flex items-center">
+                                <input type="checkbox" id="tomato" class="w-5 h-5 text-orange-600 rounded border-gray-300 focus:ring-orange-500" data-price="10">
+                                <label for="tomato" class="ml-3 text-gray-700">Tomato</label>
+                            </div>
+                            <span class="text-orange-600 font-medium">₹10</span>
+                        </div>
+                        <div class="topping-item flex items-center justify-between p-3 rounded-md hover:bg-gray-50">
+                            <div class="flex items-center">
+                                <input type="checkbox" id="bacon" class="w-5 h-5 text-orange-600 rounded border-gray-300 focus:ring-orange-500" data-price="30">
+                                <label for="bacon" class="ml-3 text-gray-700">Bacon</label>
+                            </div>
+                            <span class="text-orange-600 font-medium">₹30</span>
+                        </div>
+                        <div class="topping-item flex items-center justify-between p-3 rounded-md hover:bg-gray-50">
+                            <div class="flex items-center">
+                                <input type="checkbox" id="onions" class="w-5 h-5 text-orange-600 rounded border-gray-300 focus:ring-orange-500" data-price="15">
+                                <label for="onions" class="ml-3 text-gray-700">Onions</label>
+                            </div>
+                            <span class="text-orange-600 font-medium">₹15</span>
+                        </div>
+                    </div>
+                </div>
+
+                <button id="proceedBtn" disabled class="w-full py-3 px-4 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-lg shadow-md transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed">
+                    Proceed to Billing
+                </button>
+            </section>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Burger selection
+            const burgerCards = document.querySelectorAll('.burger-card');
+            const toppingsSection = document.getElementById('toppingsSection');
+            const selectedBurgerName = document.getElementById('selectedBurgerName');
+            const changeBurgerBtn = document.getElementById('changeBurgerBtn');
+            const proceedBtn = document.getElementById('proceedBtn');
+            
+            let selectedBurger = null;
+            let selectedToppings = [];
+
+            burgerCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Remove selection from all cards
+                    burgerCards.forEach(c => {
+                        c.classList.remove('border-orange-600');
+                        c.classList.add('border-transparent');
+                    });
+                    
+                    // Add selection to clicked card
+                    this.classList.remove('border-transparent');
+                    this.classList.add('border-orange-600');
+                    
+                    // Set selected burger
+                    selectedBurger = {
+                        name: this.dataset.burger,
+                        price: parseInt(this.dataset.price)
+                    };
+                    
+                    // Update UI
+                    selectedBurgerName.textContent = this.querySelector('h3').textContent;
+                    toppingsSection.classList.remove('hidden');
+                    document.getElementById('burgerSelection').scrollIntoView({ behavior: 'smooth' });
+                    
+                    // Reset toppings
+                    document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                        checkbox.checked = false;
+                    });
+                    proceedBtn.disabled = true;
+                });
+            });
+
+            // Change burger button
+            changeBurgerBtn.addEventListener('click', function() {
+                toppingsSection.classList.add('hidden');
+                document.querySelector('.burger-card.border-orange-600')?.classList.remove('border-orange-600');
+                selectedBurger = null;
+                proceedBtn.disabled = true;
+            });
+
+            // Toppings selection
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    proceedBtn.disabled = !selectedBurger;
+                });
+            });
+
+            // Proceed to billing
+            proceedBtn.addEventListener('click', function() {
+                if (!selectedBurger) return;
+                
+                // Get selected toppings
+                selectedToppings = [];
+                document.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
+                    selectedToppings.push({
+                        name: checkbox.id,
+                        price: parseInt(checkbox.dataset.price)
+                    });
+                });
+                
+                // Store in localStorage
+                localStorage.setItem('selectedBurger', JSON.stringify(selectedBurger));
+                localStorage.setItem('selectedToppings', JSON.stringify(selectedToppings));
+                
+                // Navigate to billing page
+                window.location.href = 'billing.html';
+            });
+        });
+    </script>
+    <script>feather.replace();</script>
+</body>
+</html>

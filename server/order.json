@@ -1,0 +1,24 @@
+[
+  {
+    "burger": {
+      "name": "chicken",
+      "price": 150
+    },
+    "toppings": [
+      {
+        "name": "cheese",
+        "price": 20
+      },
+      {
+        "name": "lettuce",
+        "price": 10
+      },
+      {
+        "name": "tomato",
+        "price": 10
+      }
+    ],
+    "total": 190,
+    "id": 1759491842137
+  }
+]
