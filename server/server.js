@@ -14,15 +14,15 @@ app.post("/confirm-order",(request,response)=>{
     const newOrder = request.body;
     console.log("Received new Order: ",newOrder);
     newOrder.id = Date.now();
-    newOrder.timestamp = new Date().toISOString;
+    newOrder.timestamp = new Date().toISOString();
     fs.readFile("orders.json","utf8",(error,data)=>{
         if(error){
             console.error(error);
-            return response.status(500).jason({message:"Error reading from database"});
+            return response.status(500).json({message:"Error reading from database"});
         }
         const orders = JSON.parse(data);
         orders.push(newOrder);
-        fs.writeFile("order.json",JSON.stringify(orders,null,2),(error)=>{
+        fs.writeFile("orders.json",JSON.stringify(orders,null,2),(error)=>{
             if(error){
                 console.log(error);
                 return response.status(500).json({message : "Error saving order"});
